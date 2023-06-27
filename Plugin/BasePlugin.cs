@@ -56,7 +56,7 @@ namespace Xrm
         /// could execute the plug-in at the same time. All per invocation state information 
         /// is stored in the context. This means that you should not use global variables in plug-ins.
         /// </remarks>
-        public void Execute(IServiceProvider serviceProvider)
+        public virtual void Execute(IServiceProvider serviceProvider)
         {
             if (serviceProvider == null)
             {
