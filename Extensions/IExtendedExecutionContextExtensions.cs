@@ -198,16 +198,16 @@ namespace Xrm
         /// /// </summary>
         /// <param name="context">IExtendedExecutionContext</param>
         /// <param name="userId">User id to check</param>
-        /// <param name="role">Role to check</param>
+        /// <param name="role">Role or roles to check</param>
         /// <returns>User has the role</returns>
-        public static bool UserHasRole(this IExtendedExecutionContext context, Guid userId, string role)
+        public static bool UserHasRole(this IExtendedExecutionContext context, Guid userId, params string[] role)
         {
             var query = new QueryExpression("role")
             {
                 ColumnSet = new ColumnSet("roleid")
             };
 
-            query.Criteria.AddCondition("name", ConditionOperator.Equal, role);
+            query.Criteria.AddCondition("name", ConditionOperator.In, role);
 
             var link = query.AddLink("systemuserroles", "roleid", "roleid");
             link.LinkCriteria.AddCondition("systemuserid", ConditionOperator.Equal, userId);
@@ -222,16 +222,16 @@ namespace Xrm
         /// /// </summary>
         /// <param name="context">IExtendedExecutionContext</param>
         /// <param name="userId">User id to check</param>
-        /// <param name="roleId">Role id to check</param>
+        /// <param name="roleIds">Ids of roles to check</param>
         /// <returns>User has the role</returns>
-        public static bool UserHasRole(this IExtendedExecutionContext context, Guid userId, Guid roleId)
+        public static bool UserHasRole(this IExtendedExecutionContext context, Guid userId, params Guid[] roleIds)
         {
             var query = new QueryExpression("role")
             {
                 ColumnSet = new ColumnSet("roleid")
             };
 
-            query.Criteria.AddCondition("roleid", ConditionOperator.Equal, roleId);
+            query.Criteria.AddCondition("roleid", ConditionOperator.In, roleIds);
 
             var link = query.AddLink("systemuserroles", "roleid", "roleid");
             link.LinkCriteria.AddCondition("systemuserid", ConditionOperator.Equal, userId);
