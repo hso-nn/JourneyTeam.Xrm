@@ -75,7 +75,7 @@ namespace Xrm
                 // Verify plugin is running for a registered event
                 if (context.Event == null)
                 {
-                    context.Trace($"No Registered Event found for event: {context.MessageName}, Entity: {context.PrimaryEntityName}, and Stage: {context.PipelineStage}!");
+                    context.Trace($"No Registered Event found for event: {context.MessageName}, Entity: {context.PrimaryEntityName}, Mode: {mode.ToString()}, and Stage: {context.PipelineStage}!");
                     return;
                 }
 
