@@ -72,6 +72,7 @@ namespace Xrm
 
             try
             {
+                var mode = (SdkMessageProcessingStepMode)context.Mode;
                 // Verify plugin is running for a registered event
                 if (context.Event == null)
                 {
@@ -89,8 +90,6 @@ namespace Xrm
                 var execute = context.Event.Execute == null
                     ? ExecutePlugin
                     : new Action<IExtendedPluginContext>(c => context.Event.Execute(c));
-
-                var mode = (SdkMessageProcessingStepMode)context.Mode;
 
                 context.Trace($"Executing registered event: {context.MessageName}, Entity: {context.PrimaryEntityName}, Id: {context.PrimaryEntityId}, Mode: {mode.ToString()}, and Stage: {context.PipelineStage}!");
 
